@@ -6,10 +6,11 @@
 
 **Note**: To be published later
 
-* glfw3.3.8-particles -> Report 2
-* ssao -> Report 2
-* ssao -> Report 8
-* my-gameloop -> Report 8
+* Project 7 - glfw3.3.8-particles -> Report 2
+* Project 6 - ssao -> Report 2
+* Project 6 - ssao -> Report 8
+* Project 1 - my-gameloop -> Report 8
+* Project 8 - stutter-investigate -> Report 11
 
 ### Test on GLFW
 
@@ -22,6 +23,8 @@ Test ran on particles: it seems there are two different causes for the stutter:
 2. \_glfwCreateContextWGL missing a frame-period (16.6ms) deadline.
   ![glfwCreateContextWGL](glfw3.3.8_particles-glfwCreateContextWGL_stutter.PNG)
 
+(both: glfw3.3.8-particles -> Report 2)
+
 In the second case, it either happens in pair like in the screenshot (summing to ~100% stutter) or in isolation.
 
 
@@ -33,6 +36,7 @@ In the second case, it either happens in pair like in the screenshot (summing to
 Mostly no stutter. None of the kind above (sometimes a longer frame)
 
 ![gl_ssao](gl_ssao-stutter_free.PNG)
+(ssao -> Report 2)
 
 #### Modifications to use the default GLFW context even on Windows.
 
@@ -42,12 +46,24 @@ enabled by defining `GLFW_WIN_CONTEXT` macro.
 The second kind of stutter (`_glfwCreateContextWGL`) is frequent, the first (`glClear`) seems absent:
 
 ![my-app](gl_ssao-glfw_context.PNG)
+(ssao -> Report 8)
 
 ### Custom Glfw 3.3.6 app
 
 Stutter profile ressembling the glfw samples (with the two same kind of stutters):
 
 ![my-app](myapp_overall.PNG)
+(my-gameloop -> Report 8)
+(see also: stutter-investigate -> Report 3)
+
+#### Modifications to use the custom nvpro context creation on Windows.
+
+The first kind of stutter (`glClear`) is still present, but the secodn (`_glfwCreateContextWGL`) seems absent.
+
+![stutter-investigate](stutter_investigate_app-glClear_stutter.PNG)
+(stutter-investigate -> Report 11)
+(see also: stutter-investigate -> Report 9)
+
 
 ### Misc. observations:
 
